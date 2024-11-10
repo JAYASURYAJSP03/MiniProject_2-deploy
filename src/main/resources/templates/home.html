@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="img.png" type="image/x-icon">
+    <style>
+        body {
+            /* Default background for mobile screens */
+            background-image: url('doctorImageMobile.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        /* Background for larger screens (laptops, desktops) */
+        @media (min-width: 768px) {
+            body {
+                background-image: url('doctorImageLaptop.jpg');
+            }
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            padding: 50px;
+            border-radius: 10px;
+            margin-top: 50px; /* Space for the logout button */
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Ensure buttons wrap on smaller screens */
+        }
+
+        .btn {
+            min-width: 200px;
+        }
+
+        .logout-btn {
+            background-color: red;
+            color: white;
+            width: 150px;
+            text-align: center;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background-color: darkred;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<!-- Log Out Button -->
+<form action="/logout" method="post" class="mt-4">
+    <button type="submit" class="logout-btn">Log Out</button>
+</form>
+
+<div class="container text-center">
+    <h1>Welcome to JSP Hospital</h1>
+    <div class="btn-group mt-4">
+        <a href="/viewDoctors" class="btn btn-primary">View Doctors/Book Appointments</a>
+        <a href="/viewAppointments" class="btn btn-primary">View Appointments</a>
+        <a href="/viewMedications" class="btn btn-primary">View Medications</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; <span id="year"></span> JSP. All Rights Reserved.</p>
+</footer>
+
+<script>
+    // Dynamically update the year in the footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Doctors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Doctors List</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Specialisation</th>
+            <th>Time Slot</th>
+            <th>Available Time</th>
+            <th>Doctor Fee</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="doctor : ${doctors}">
+            <td th:text="${doctor.doctorId}"></td>
+            <td th:text="${doctor.name}"></td>
+            <td th:text="${doctor.specialization}"></td> <!-- Fixed to match 'specialization' in the entity -->
+            <td th:text="${doctor.availableSlot}"></td>
+            <td th:text="${doctor.availableTime}"></td>
+            <td th:text="${doctor.consultationFee}"></td> <!-- Fixed to match 'consultationFee' in the entity -->
+            <td><a th:href="@{/bookAppointment/{doctorId}(doctorId=${doctor.doctorId})}" class="btn btn-success">Book Appointment</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/home" class="btn btn-secondary">Back to Home</a>
+</div>
+</body>
+</html>

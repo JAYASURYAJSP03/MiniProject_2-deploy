@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Book Appointment</h1>
+    <form action="/addAppointment" method="post" th:object="${appointment}">
+
+        <!-- Hidden field for doctor ID only -->
+        <input type="hidden" th:field="*{doctor.doctorId}" />
+
+        <!-- Patient details form fields -->
+        <div class="form-group">
+            <label for="patientName">Patient Name</label>
+            <input type="text" class="form-control" id="patientName" th:field="*{patientName}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="patientAge">Age</label>
+            <input type="number" class="form-control" id="patientAge" th:field="*{patientAge}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="patientGender">Gender</label>
+            <select class="form-control" id="patientGender" th:field="*{patientGender}" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="patientEmail">Email</label>
+            <input type="email" class="form-control" id="patientEmail" th:field="*{patientEmail}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="patientPhone">Phone</label>
+            <input type="text" class="form-control" id="patientPhone" th:field="*{patientPhone}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="appointmentDate">Date</label>
+            <input type="date" class="form-control" id="appointmentDate" th:field="*{appointmentDate}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="medicalReason">Reason</label>
+            <input type="text" class="form-control" id="medicalReason" th:field="*{medicalReason}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Book Appointment</button>
+    </form>
+
+    <a href="/home" class="btn btn-secondary mt-3">Back to Home</a>
+</div>
+</body>
+</html>
