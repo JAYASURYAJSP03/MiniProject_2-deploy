@@ -75,13 +75,21 @@ public class AppointmentController {
     @PreAuthorize("hasAnyRole('ROLE_DOCTOR', 'ROLE_PATIENT')")
     @PostMapping("/addAppointment")
     public String addAppointment(@ModelAttribute Appointment appointment) {
-
-        long doctorId=appointment.getDoctor().getDoctorId();
+        long doctorId = appointment.getDoctor().getDoctorId();
 
         // Save the appointment with the complete doctor information
         appointmentService.addAppointment(appointment);
-        return "redirect:/home";
+
+        // Redirect to success page after appointment is added
+        return "redirect:/appointmentSuccess";
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_DOCTOR', 'ROLE_PATIENT')")
+    @GetMapping("/appointmentSuccess")
+    public String appointmentSuccess() {
+        return "appointmentSuccess";
+    }
+
 
 
 }
