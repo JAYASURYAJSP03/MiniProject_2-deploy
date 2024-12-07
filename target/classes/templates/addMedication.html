@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Medication</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Add Medication for Appointment ID: <span th:text="${appointmentId}"></span></h1>
+
+    <!-- Medication Form -->
+    <form action="#" th:action="@{/saveMedication/{appointmentId}(appointmentId=${appointmentId})}" method="post">
+        <div class="form-group">
+            <label for="name">Medication Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter medication name" required>
+        </div>
+        <div class="form-group">
+            <label for="dosage">Dosage</label>
+            <input type="text" class="form-control" id="dosage" name="dosage" placeholder="Enter dosage" required>
+        </div>
+        <div class="form-group">
+            <label for="foodRelation">Food Relation</label>
+            <input type="text" class="form-control" id="foodRelation" name="foodRelation" placeholder="Enter food relation" required>
+        </div>
+        <div class="form-group">
+            <label for="timing">Timing</label>
+            <input type="text" class="form-control" id="timing" name="timing" placeholder="Enter timing" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Medication</button>
+    </form>
+
+    <!-- Back to medications page -->
+    <a th:href="@{/medications/{appointmentId}(appointmentId=${appointmentId})}" class="btn btn-secondary mt-3">Back to Medications</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -42,7 +42,6 @@ public class MedicationController {
     @GetMapping("/medications/{appointmentId}")
     public String viewMedicationsPage(@PathVariable Long appointmentId, Model model) {
         Appointment appointment = medicationService.findAppointmentById(appointmentId);
-
         // Get the list of medications for the appointment
         List<Medication> medications = medicationService.displayAll(appointmentId);
 

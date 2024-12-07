@@ -3,6 +3,7 @@ package com.Task.MiniProject_2.secirityConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,7 +36,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(configurer -> configurer.disable())
 
                 .authorizeRequests(authorize -> authorize
@@ -43,7 +44,8 @@ public class SecurityConfig {
                         .requestMatchers("/", "/register", "/login").permitAll() // Allow access to register/login
                         .anyRequest().authenticated() // Require authentication for all other requests
                 )
-                .formLogin(formLogin -> formLogin
+                .formLogin(
+                        formLogin -> formLogin
 
                         .loginPage("/login")  // Custom login page
                         .loginProcessingUrl("/login")  // Handle login form submission

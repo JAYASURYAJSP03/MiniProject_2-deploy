@@ -1,7 +1,6 @@
 package com.Task.MiniProject_2.controller;
 
 import com.Task.MiniProject_2.entity.Doctor;
-import com.Task.MiniProject_2.entity.Medication;
 import com.Task.MiniProject_2.service.AppointmentService;
 import com.Task.MiniProject_2.entity.Appointment;
 import com.Task.MiniProject_2.service.DoctorService;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Controller
@@ -57,11 +56,11 @@ public class AppointmentController {
     // Book an appointment (This will take the user to the appointment booking page)
     @PreAuthorize("hasAnyRole('ROLE_DOCTOR', 'ROLE_PATIENT')")
     @GetMapping("/bookAppointment/{doctorId}")
-    public String bookAppointment(@PathVariable Long doctorId, Model model) {
+    public String bookAppointment(@PathVariable("doctorId") Long id, Model model) {
 
         Appointment appointment = new Appointment();
 
-        Doctor doctor = doctorService.findDoctorById(doctorId);
+        Doctor doctor = doctorService.findDoctorById(id);
         appointment.setDoctor(doctor);
 //        model.addAttribute("doctor", doctor);  // Adding the doctor to the model
         model.addAttribute("appointment", appointment); // appointment now contains medications

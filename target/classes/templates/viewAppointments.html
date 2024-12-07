@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Appointments</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>View Appointments</h1>
+
+    <!-- Search form for Patient Name and Doctor Name -->
+    <form action="/viewAppointments" method="get" class="mb-4">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" name="patientName" class="form-control" placeholder="Search by Patient Name">
+            </div>
+            <div class="col">
+                <input type="text" name="doctorName" class="form-control" placeholder="Search by Doctor Name">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Display error message if no appointments found for search -->
+    <div th:if="${searchedAppointments != null and searchedAppointments.isEmpty()}" class="alert alert-warning" role="alert">
+        No appointments found for the specified search criteria.
+    </div>
+
+    <!-- Display searched appointment details in a table format -->
+    <h3 th:if="${searchedAppointments != null and not searchedAppointments.isEmpty()}">Searched Appointments</h3>
+    <table class="table" th:if="${searchedAppointments != null and not searchedAppointments.isEmpty()}">
+        <thead>
+        <tr>
+            <th>Appointment ID</th>
+            <th>Patient Name</th>
+            <th>Doctor Name</th>
+            <th>Medical Reason</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="searchedAppointment : ${searchedAppointments}">
+            <td th:text="${searchedAppointment.appointmentId}"></td>
+            <td th:text="${searchedAppointment.patientName}"></td>
+            <td th:text="${searchedAppointment.doctor.name}"></td>
+            <td th:text="${searchedAppointment.medicalReason}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Display all appointments in a table format -->
+    <h3 th:if="${appointments != null and not appointments.isEmpty()}">All Appointments</h3>
+    <table class="table" th:if="${appointments != null and not appointments.isEmpty()}">
+        <thead>
+        <tr>
+            <th>Patient Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Appointment Date</th>
+            <th>Reason</th>
+            <th>Doctor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.patientName}"></td>
+            <td th:text="${appointment.patientAge}"></td>
+            <td th:text="${appointment.patientGender}"></td>
+            <td th:text="${appointment.patientEmail}"></td>
+            <td th:text="${appointment.patientPhone}"></td>
+            <td th:text="${appointment.appointmentDate}"></td>
+            <td th:text="${appointment.medicalReason}"></td>
+            <td th:text="${appointment.doctor.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/home" class="btn btn-secondary mt-3">Back to Home</a>
+</div>
+</body>
+</html>

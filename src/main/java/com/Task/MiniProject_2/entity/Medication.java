@@ -22,4 +22,6 @@ public class Medication {
     @ManyToOne
     @JoinColumn(name = "appointment_id")
     private Appointment appointment; // The appointment this medication is associated with
+
+
 }

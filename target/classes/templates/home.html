@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="img.png" type="image/x-icon">
+    <style>
+        body {
+            background-image: url('doctorImageMobile.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+        /* Background for larger screens (laptops, desktops) */
+        @media (min-width: 1000px) {
+            body {
+                background-image: url('doctorImageLaptop.jpg');
+            }
+        }
+
+        /* Styles for smaller screens up to 1000px */
+        @media (max-width: 1000px) {
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Styles specifically for mobile screens (widths up to 1000px) */
+        @media (max-width: 1000px) {
+            .logout-btn {
+                padding: 3px 6px;
+                font-size: 10px;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 50px;
+            border-radius: 10px;
+            margin-top: 50px;
+            position: relative;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            min-width: 200px;
+        }
+        .logout-btn {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background-color: darkred;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container text-center">
+    <form action="/logout" method="post">
+        <button type="submit" class="logout-btn btn btn-danger btn-sm">Log Out</button>
+    </form>
+    <h1>Welcome to JSP Hospital</h1>
+    <div class="btn-group mt-4">
+        <a href="/viewDoctors" class="btn btn-primary">View Doctors/Book Appointments</a>
+        <a href="/viewAppointments" class="btn btn-primary">View Appointments</a>
+        <a href="/viewMedications" class="btn btn-primary">View Medications</a>
+    </div>
+</div>
+<footer>
+    <p>&copy; <span id="year"></span> JSP. All Rights Reserved.</p>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

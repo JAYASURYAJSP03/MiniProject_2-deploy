@@ -1,0 +1,9 @@
+com\Task\MiniProject_2\controllerTest\AppointmentControllerTest.class
+com\Task\MiniProject_2\serviceTest\AppointmentServiceTest.class
+com\Task\MiniProject_2\controllerTest\MedicationControllerTest.class
+com\Task\MiniProject_2\controllerTest\UserControllerTest.class
+com\Task\MiniProject_2\MiniProject2ApplicationTests.class
+com\Task\MiniProject_2\serviceTest\MedicationServiceTest.class
+com\Task\MiniProject_2\serviceTest\UserServiceTest.class
+com\Task\MiniProject_2\controllerTest\DoctorControllerTest.class
+com\Task\MiniProject_2\serviceTest\DoctorServiceTest.class
