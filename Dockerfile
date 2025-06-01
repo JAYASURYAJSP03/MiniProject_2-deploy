@@ -1,33 +1,36 @@
-FROM ubuntu:latest
-LABEL authors="jayas"
-
-ENTRYPOINT ["top", "-b"]
-
-# Use a base image with Java
+# Build stage
 FROM openjdk:17-jdk-slim AS build
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the pom.xml and source code
-COPY pom.xml .
+# Copy Maven wrapper and pom.xml to install dependencies separately
+COPY .mvn .mvn
+COPY mvnw pom.xml ./
+
+# Make the mvnw script executable
+RUN chmod +x mvnw
+
+# Download dependencies only (speeds up builds if no dependency changes)
+RUN ./mvnw dependency:resolve
+
+# Copy the source code
 COPY src ./src
 
-# Install Maven and build the application
-RUN apt-get update && apt-get install -y maven
-RUN mvn clean package -DskipTests
+# Build the application using Maven
+RUN ./mvnw clean package -DskipTests
 
-# Create a new image for running the application
+# Run stage
 FROM openjdk:17-jdk-slim
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the JAR file from the build image
-COPY --from=build /app/target/MiniProject_2-0.0.1-SNAPSHOT.jar /app/MiniProject_2.jar
+# Copy the jar from the build stage
+COPY --from=build /app/target/MiniProject_2-0.0.1-SNAPSHOT.jar /app.jar
 
-# Expose the port your app will run on (default Spring Boot port is 8080)
+# Expose the application port (default for Spring Boot is 8080)
 EXPOSE 8080
 
-# Run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "MiniProject_2.jar"]
+# Command to run the Spring Boot application
+ENTRYPOINT ["java", "-jar", "/app.jar"]
